@@ -1,3 +1,9 @@
+// ==============================================
+// CSS Reset
+// Removes default browser styling for consistent cross-browser rendering.
+// Loaded once in global.scss — never import this directly in components.
+// ==============================================
+
 @use './variables' as *;
 
 *,

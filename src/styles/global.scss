@@ -1,1 +1,7 @@
+// ==============================================
+// Global Styles Entry Point
+// Imported once in main.tsx. Applies reset and global styles to the entire app.
+// Do NOT import component-specific styles here — use .module.scss files instead.
+// ==============================================
+
 @use './reset';

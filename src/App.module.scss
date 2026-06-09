@@ -1,4 +1,17 @@
-@use './styles/variables' as *;
+// ==============================================
+// Example SCSS Module
+// Each component gets its own .module.scss file.
+// Classes are locally scoped — no naming collisions between components.
+//
+// Usage in component:
+//   import styles from './App.module.scss';
+//   <div className={styles.app}>...</div>
+//
+// Import variables with: @use '@/styles/variables' as *;
+// This gives access to all $color-*, $spacing-*, $font-size-* tokens.
+// ==============================================
+
+@use '@/styles/variables' as *;
 
 .app {
   max-width: 1280px;
