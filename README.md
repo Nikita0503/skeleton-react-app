@@ -260,6 +260,65 @@ const { mutate, isPending } = useExampleCreate();
 </button>
 ```
 
+## UI Components (Radix, Sonner, react-day-picker)
+
+### Why use libraries for UI components?
+
+Complex interactive components (modals, dropdowns, date pickers) require hundreds of lines of code to implement correctly: focus trapping, keyboard navigation, screen reader support, scroll locking, click-outside detection, positioning logic. Writing this from scratch means weeks of work and bugs that only show up in edge cases. Libraries solve these problems once, correctly, and let you focus on styling and business logic.
+
+### Radix UI — Modal (`@radix-ui/react-dialog`)
+
+Gives you: focus trap, scroll lock, ESC to close, click overlay to close, portal rendering, ARIA attributes. You style everything yourself.
+
+```tsx
+import { ExampleModal } from '@/components/ExampleModal';
+
+const [open, setOpen] = useState(false);
+
+<button onClick={() => setOpen(true)}>Open</button>
+<ExampleModal open={open} onClose={() => setOpen(false)} title="Confirm">
+  <p>Are you sure?</p>
+</ExampleModal>
+```
+
+### Radix UI — Select (`@radix-ui/react-select`)
+
+Gives you: keyboard navigation, typeahead search, automatic positioning, portal rendering. You style everything yourself.
+
+```tsx
+import { ExampleSelect } from '@/components/ExampleSelect';
+
+const options = [
+  { value: 'resort', label: 'Resort' },
+  { value: 'city', label: 'City Tour' },
+];
+
+<ExampleSelect options={options} value={value} onChange={setValue} placeholder="Tour type" />
+```
+
+### Sonner — Toast Notifications
+
+Ready-to-use success/error notifications. No styling needed.
+
+```tsx
+import { toast } from 'sonner';
+
+toast.success('Booking saved!');
+toast.error('Something went wrong');
+```
+
+### react-day-picker — Calendar
+
+Lightweight date picker with full styling control.
+
+```tsx
+import { ExampleDatePicker } from '@/components/ExampleDatePicker';
+
+const [date, setDate] = useState<Date>();
+
+<ExampleDatePicker selected={date} onSelect={setDate} />
+```
+
 ## Forms (React Hook Form + Zod)
 
 Forms use React Hook Form for state management and Zod for validation. See `src/components/ExampleForm/` for a working example.

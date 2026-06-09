@@ -1,0 +1,8 @@
+@use '@/styles/variables' as *;
+
+.wrapper {
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  display: inline-block;
+}
