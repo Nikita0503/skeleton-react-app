@@ -1,0 +1,38 @@
+@use '@/styles/variables' as *;
+
+.page {
+  padding: $spacing-2xl;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: 700;
+  margin-bottom: $spacing-lg;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-top: $spacing-lg;
+
+  button {
+    width: 40px;
+    height: 40px;
+    font-size: $font-size-xl;
+    background: $color-primary;
+    color: white;
+    border-radius: $radius-full;
+
+    &:hover {
+      background: $color-primary-hover;
+    }
+  }
+
+  span {
+    font-size: $font-size-2xl;
+    font-weight: 600;
+    min-width: 40px;
+    text-align: center;
+  }
+}

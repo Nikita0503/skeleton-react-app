@@ -40,13 +40,45 @@ npm run dev
 
 ```
 src/
+├── components/           # Shared UI components
+│   └── ExampleComponent/ # Template: ComponentName.tsx + .module.scss + index.ts
+├── pages/                # Page components (one per route)
+│   └── ExamplePage/      # Template: PageName.tsx + .module.scss + index.ts
+├── hooks/                # Custom hooks
+│   └── useExampleCounter.ts
+├── lib/                  # Core infrastructure (axios, query client, store, router)
+├── types/                # TypeScript types
+│   └── example.ts
+├── utils/                # Pure utility functions (no React, no side effects)
+│   └── exampleFormatPrice.ts
 ├── styles/               # Global styles
 │   ├── variables.scss    # Design tokens (colors, spacing, typography, breakpoints)
 │   ├── reset.scss        # CSS reset for cross-browser consistency
 │   └── global.scss       # Entry point — imported once in main.tsx
-├── App.tsx               # Root component
-├── App.module.scss       # Example SCSS Module usage
+├── App.tsx               # Root component (providers + router)
 └── main.tsx              # App entry point
+```
+
+### Where does my code go?
+
+| I need to... | Put it in |
+|-------------|-----------|
+| Create a UI component (Button, Modal, Card) | `src/components/` |
+| Add a new page/route | `src/pages/` |
+| Write a custom hook | `src/hooks/` |
+| Define types | `src/types/` |
+| Write a pure utility function | `src/utils/` |
+| Configure axios, query client, store | `src/lib/` |
+
+### Import Rules
+
+```tsx
+// Use path alias — GOOD
+import { ExampleComponent } from '@/components/ExampleComponent';
+import { useExampleCounter } from '@/hooks/useExampleCounter';
+
+// Relative imports — BAD
+import { ExampleComponent } from '../../components/ExampleComponent';
 ```
 
 ## Styling Guide
