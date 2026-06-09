@@ -228,6 +228,38 @@ if (error) return <p>Error!</p>;
 return <div>{data.name}</div>;
 ```
 
+**Creating a mutation hook (POST/PUT/DELETE):**
+
+```tsx
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiClient } from '@/lib/api';
+
+export const useExampleCreate = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (newUser: { name: string; email: string }) => {
+      const response = await apiClient.post('/users', newUser);
+      return response.data;
+    },
+    onSuccess: () => {
+      // Invalidate cache — triggers automatic refetch of the list
+      queryClient.invalidateQueries({ queryKey: ['example-users'] });
+    },
+  });
+};
+```
+
+**Using mutation in a component:**
+
+```tsx
+const { mutate, isPending } = useExampleCreate();
+
+<button onClick={() => mutate({ name: 'John', email: 'john@test.com' })} disabled={isPending}>
+  {isPending ? 'Saving...' : 'Create User'}
+</button>
+```
+
 ## Path Aliases
 
 Use `@/` instead of relative paths:
