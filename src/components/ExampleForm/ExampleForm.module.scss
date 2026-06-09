@@ -1,0 +1,53 @@
+@use '@/styles/variables' as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  max-width: 400px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: 500;
+  }
+
+  input {
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    font-size: $font-size-base;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+  }
+}
+
+.error {
+  font-size: $font-size-xs;
+  color: $color-error;
+}
+
+.submit {
+  padding: $spacing-sm $spacing-md;
+  background: $color-primary;
+  color: white;
+  border-radius: $radius-md;
+  font-weight: 500;
+
+  &:hover:not(:disabled) {
+    background: $color-primary-hover;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

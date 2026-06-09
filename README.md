@@ -260,6 +260,36 @@ const { mutate, isPending } = useExampleCreate();
 </button>
 ```
 
+## Forms (React Hook Form + Zod)
+
+Forms use React Hook Form for state management and Zod for validation. See `src/components/ExampleForm/` for a working example.
+
+**Pattern:**
+
+```tsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+// 1. Define schema (validation + types in one place)
+const schema = z.object({
+  name: z.string().min(2, 'Name must be at least 2 characters'),
+  email: z.string().email('Invalid email'),
+});
+
+// 2. Get type from schema
+type FormData = z.infer<typeof schema>;
+
+// 3. Use in component
+const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+  resolver: zodResolver(schema),
+});
+
+// 4. Register inputs
+<input {...register('name')} />
+{errors.name && <span>{errors.name.message}</span>}
+```
+
 ## Path Aliases
 
 Use `@/` instead of relative paths:
