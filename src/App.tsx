@@ -1,12 +1,11 @@
-import styles from './App.module.scss';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { routes } from '@/lib/router';
+
+// createBrowserRouter — creates the router instance from route config
+const router = createBrowserRouter(routes);
 
 function App() {
-  return (
-    <div className={styles.app}>
-      <h1 className={styles.title}>Travel Agency</h1>
-      <p className={styles.subtitle}>Skeleton is ready</p>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

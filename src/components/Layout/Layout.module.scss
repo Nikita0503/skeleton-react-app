@@ -1,0 +1,19 @@
+@use '@/styles/variables' as *;
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: $spacing-md $spacing-xl;
+  border-bottom: 1px solid $color-border;
+  font-weight: 600;
+  font-size: $font-size-lg;
+}
+
+.main {
+  flex: 1;
+  padding: $spacing-xl;
+}

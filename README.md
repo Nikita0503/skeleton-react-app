@@ -115,7 +115,45 @@ All reusable values live in `src/styles/variables.scss`. Import in any module:
 
 Available tokens: `$color-*`, `$font-size-*`, `$spacing-*`, `$radius-*`, `$shadow-*`, `$breakpoint-*`.
 
-## Path Aliases
+## Routing
+
+Routes are defined in `src/lib/router/routes.tsx`. The app uses React Router v7 with `createBrowserRouter`.
+
+### Adding a new page
+
+1. Create page in `src/pages/MyPage/MyPage.tsx`
+2. Add route to `src/lib/router/routes.tsx`:
+
+```tsx
+{
+  path: '/my-page',
+  element: <MyPage />,
+}
+```
+
+### Protected routes
+
+Wrap any route that requires authentication:
+
+```tsx
+import { ProtectedRoute } from '@/lib/router';
+
+{
+  path: '/dashboard',
+  element: (
+    <ProtectedRoute>
+      <DashboardPage />
+    </ProtectedRoute>
+  ),
+}
+```
+
+The `ProtectedRoute` component checks if user is authenticated. If not — redirects to home. Replace the `isAuthenticated` check in `src/lib/router/ProtectedRoute.tsx` with your real auth logic.
+
+### Layout
+
+All pages share a common Layout (`src/components/Layout/`) with header and main content area. The `<Outlet />` renders the active page.
+
 
 Use `@/` instead of relative paths:
 
@@ -125,4 +163,16 @@ import { Button } from '@/components/Button';
 
 // Bad
 import { Button } from '../../../components/Button';
+```
+
+## Path Aliases
+
+Use `@/` instead of relative paths:
+
+```tsx
+// Good
+import { ExampleComponent } from '@/components/ExampleComponent';
+
+// Bad
+import { ExampleComponent } from '../../../components/ExampleComponent';
 ```
