@@ -2,20 +2,20 @@
 
 ## Tech Stack
 
-| Category | Library | Purpose |
-|----------|---------|---------|
-| Build | Vite | Fast dev server, HMR, production bundling |
-| Styling | SCSS Modules | Scoped styles per component + SCSS variables/mixins |
-| State (client) | Zustand | Lightweight global state (UI state, filters) |
-| State (server) | TanStack Query v5 | API data caching, loading/error states, refetching |
-| Routing | React Router v7 | SPA page navigation, protected routes |
-| Forms | React Hook Form + Zod | Performant forms with schema-based validation |
-| HTTP | Axios | API calls with interceptors for auth/error handling |
-| UI Primitives | Radix UI | Accessible headless components (Dialog, Select) |
-| Date Picker | react-day-picker | Calendar component for date selection |
-| Toasts | Sonner | Success/error notification popups |
-| Testing | Vitest + React Testing Library | Unit and component testing |
-| Code Quality | ESLint + Prettier + Husky | Linting, formatting, pre-commit checks |
+| Category       | Library                        | Purpose                                             |
+| -------------- | ------------------------------ | --------------------------------------------------- |
+| Build          | Vite                           | Fast dev server, HMR, production bundling           |
+| Styling        | SCSS Modules                   | Scoped styles per component + SCSS variables/mixins |
+| State (client) | Zustand                        | Lightweight global state (UI state, filters)        |
+| State (server) | TanStack Query v5              | API data caching, loading/error states, refetching  |
+| Routing        | React Router v7                | SPA page navigation, protected routes               |
+| Forms          | React Hook Form + Zod          | Performant forms with schema-based validation       |
+| HTTP           | Axios                          | API calls with interceptors for auth/error handling |
+| UI Primitives  | Radix UI                       | Accessible headless components (Dialog, Select)     |
+| Date Picker    | react-day-picker               | Calendar component for date selection               |
+| Toasts         | Sonner                         | Success/error notification popups                   |
+| Testing        | Vitest + React Testing Library | Unit and component testing                          |
+| Code Quality   | ESLint + Prettier + Husky      | Linting, formatting, pre-commit checks              |
 
 ## Getting Started
 
@@ -26,15 +26,15 @@ npm run dev
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start dev server (http://localhost:5173) |
-| `npm run build` | TypeScript check + production build |
-| `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Run ESLint with auto-fix |
-| `npm run format` | Format all files with Prettier |
-| `npm run format:check` | Check formatting without changes |
+| Command                | Description                              |
+| ---------------------- | ---------------------------------------- |
+| `npm run dev`          | Start dev server (http://localhost:5173) |
+| `npm run build`        | TypeScript check + production build      |
+| `npm run preview`      | Preview production build locally         |
+| `npm run lint`         | Run ESLint                               |
+| `npm run lint:fix`     | Run ESLint with auto-fix                 |
+| `npm run format`       | Format all files with Prettier           |
+| `npm run format:check` | Check formatting without changes         |
 
 ## Project Structure
 
@@ -61,14 +61,14 @@ src/
 
 ### Where does my code go?
 
-| I need to... | Put it in |
-|-------------|-----------|
+| I need to...                                | Put it in         |
+| ------------------------------------------- | ----------------- |
 | Create a UI component (Button, Modal, Card) | `src/components/` |
-| Add a new page/route | `src/pages/` |
-| Write a custom hook | `src/hooks/` |
-| Define types | `src/types/` |
-| Write a pure utility function | `src/utils/` |
-| Configure axios, query client, store | `src/lib/` |
+| Add a new page/route                        | `src/pages/`      |
+| Write a custom hook                         | `src/hooks/`      |
+| Define types                                | `src/types/`      |
+| Write a pure utility function               | `src/utils/`      |
+| Configure axios, query client, store        | `src/lib/`        |
 
 ### Import Rules
 
@@ -91,7 +91,7 @@ Every component gets its own `.module.scss` file. Classes are locally scoped —
 // Component file
 import styles from './Button.module.scss';
 
-<button className={styles.primary}>Click</button>
+<button className={styles.primary}>Click</button>;
 ```
 
 ```scss
@@ -209,8 +209,9 @@ import { apiClient } from '@/lib/api';
 
 export const useExampleQuery = () => {
   return useQuery({
-    queryKey: ['example-users'],       // unique cache key
-    queryFn: async () => {             // fetch function
+    queryKey: ['example-users'], // unique cache key
+    queryFn: async () => {
+      // fetch function
       const response = await apiClient.get('/users');
       return response.data;
     },
@@ -257,7 +258,7 @@ const { mutate, isPending } = useExampleCreate();
 
 <button onClick={() => mutate({ name: 'John', email: 'john@test.com' })} disabled={isPending}>
   {isPending ? 'Saving...' : 'Create User'}
-</button>
+</button>;
 ```
 
 ## UI Components (Radix, Sonner, react-day-picker)
@@ -293,7 +294,7 @@ const options = [
   { value: 'city', label: 'City Tour' },
 ];
 
-<ExampleSelect options={options} value={value} onChange={setValue} placeholder="Tour type" />
+<ExampleSelect options={options} value={value} onChange={setValue} placeholder="Tour type" />;
 ```
 
 ### Sonner — Toast Notifications
@@ -316,7 +317,7 @@ import { ExampleDatePicker } from '@/components/ExampleDatePicker';
 
 const [date, setDate] = useState<Date>();
 
-<ExampleDatePicker selected={date} onSelect={setDate} />
+<ExampleDatePicker selected={date} onSelect={setDate} />;
 ```
 
 ## Forms (React Hook Form + Zod)
@@ -340,13 +341,19 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 // 3. Use in component
-const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+const {
+  register,
+  handleSubmit,
+  formState: { errors },
+} = useForm<FormData>({
   resolver: zodResolver(schema),
 });
 
 // 4. Register inputs
-<input {...register('name')} />
-{errors.name && <span>{errors.name.message}</span>}
+<input {...register('name')} />;
+{
+  errors.name && <span>{errors.name.message}</span>;
+}
 ```
 
 ## Path Aliases
@@ -367,10 +374,10 @@ Tests live next to the file they test: `ExampleComponent.test.tsx` beside `Examp
 
 ### Running tests
 
-| Command | Description |
-|---------|-------------|
-| `npm run test` | Watch mode (re-runs on file changes) |
-| `npm run test:run` | Single run (for CI) |
+| Command            | Description                          |
+| ------------------ | ------------------------------------ |
+| `npm run test`     | Watch mode (re-runs on file changes) |
+| `npm run test:run` | Single run (for CI)                  |
 
 ### Component test example
 
@@ -399,3 +406,18 @@ describe('sum', () => {
   });
 });
 ```
+
+## Git Hooks (Husky + lint-staged)
+
+On every `git commit`, Husky automatically runs lint-staged which:
+
+- Runs **ESLint** (with auto-fix) on `.ts` / `.tsx` files
+- Runs **Prettier** (format) on all staged files
+
+If ESLint finds an error that can't be auto-fixed — the commit is blocked until you fix it manually.
+
+This guarantees that only clean, formatted code enters the repository. No one can accidentally push broken or messy code.
+
+### Setup (automatic)
+
+Husky activates automatically after `npm install` (via the `prepare` script). No manual setup needed.
