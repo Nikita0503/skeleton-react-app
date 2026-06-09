@@ -421,3 +421,21 @@ This guarantees that only clean, formatted code enters the repository. No one ca
 ### Setup (automatic)
 
 Husky activates automatically after `npm install` (via the `prepare` script). No manual setup needed.
+
+## VS Code Settings
+
+The `.vscode/settings.json` file configures automatic formatting for everyone who opens this project in VS Code:
+
+- **Format on Save** — Prettier formats the file every time you press Ctrl+S / Cmd+S
+- **ESLint auto-fix** — fixes lint errors automatically on Save
+- **Organize imports** — sorts and removes unused imports on Save
+
+### Required VS Code Extension
+
+Install the **Prettier** extension for formatting to work:
+
+```
+Extension ID: esbenp.prettier-vscode
+```
+
+Search "Prettier - Code formatter" in VS Code Extensions panel and install it.

@@ -1,0 +1,15 @@
+{
+  // Use Prettier as the default code formatter for all files
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // Automatically format file on every Save (Ctrl+S / Cmd+S)
+  "editor.formatOnSave": true,
+
+  "editor.codeActionsOnSave": {
+    // Auto-fix all ESLint errors on Save (unused vars, missing deps, etc.)
+    "source.fixAll.eslint": "always",
+
+    // Auto-sort and remove unused imports on Save
+    "source.organizeImports": "always"
+  }
+}
