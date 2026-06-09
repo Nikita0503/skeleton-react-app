@@ -154,6 +154,29 @@ The `ProtectedRoute` component checks if user is authenticated. If not — redir
 
 All pages share a common Layout (`src/components/Layout/`) with header and main content area. The `<Outlet />` renders the active page.
 
+## State Management (Zustand)
+
+Zustand handles **client state** — UI toggles, filters, modals, local preferences.  
+For **server state** (API data) use TanStack Query hooks.
+
+Store is defined in `src/lib/store/`. Use directly in any component — no Provider needed.
+
+```tsx
+import { useExampleStore } from '@/lib/store/exampleStore';
+
+const MyComponent = () => {
+  const { count, increment, isModalOpen, openModal } = useExampleStore();
+
+  return (
+    <div>
+      <p>{count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={openModal}>Open</button>
+    </div>
+  );
+};
+```
+
 ## API Layer (Axios + TanStack Query)
 
 ### Axios Instance
