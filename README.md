@@ -360,3 +360,42 @@ import { ExampleComponent } from '@/components/ExampleComponent';
 // Bad
 import { ExampleComponent } from '../../../components/ExampleComponent';
 ```
+
+## Testing (Vitest + React Testing Library)
+
+Tests live next to the file they test: `ExampleComponent.test.tsx` beside `ExampleComponent.tsx`.
+
+### Running tests
+
+| Command | Description |
+|---------|-------------|
+| `npm run test` | Watch mode (re-runs on file changes) |
+| `npm run test:run` | Single run (for CI) |
+
+### Component test example
+
+```tsx
+import { render, screen } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { ExampleComponent } from './ExampleComponent';
+
+describe('ExampleComponent', () => {
+  it('renders the title', () => {
+    render(<ExampleComponent title="Hello" />);
+    expect(screen.getByText('Hello')).toBeInTheDocument();
+  });
+});
+```
+
+### Utility test example
+
+```tsx
+import { describe, it, expect } from 'vitest';
+import { sum } from './exampleUtil';
+
+describe('sum', () => {
+  it('adds two numbers', () => {
+    expect(sum(2, 3)).toBe(5);
+  });
+});
+```
