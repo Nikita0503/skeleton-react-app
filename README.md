@@ -1,73 +1,96 @@
-# React + TypeScript + Vite
+# Travel Agency UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Tech Stack
 
-Currently, two official plugins are available:
+| Category | Library | Purpose |
+|----------|---------|---------|
+| Build | Vite | Fast dev server, HMR, production bundling |
+| Styling | SCSS Modules | Scoped styles per component + SCSS variables/mixins |
+| State (client) | Zustand | Lightweight global state (UI state, filters) |
+| State (server) | TanStack Query v5 | API data caching, loading/error states, refetching |
+| Routing | React Router v7 | SPA page navigation, protected routes |
+| Forms | React Hook Form + Zod | Performant forms with schema-based validation |
+| HTTP | Axios | API calls with interceptors for auth/error handling |
+| UI Primitives | Radix UI | Accessible headless components (Dialog, Select) |
+| Date Picker | react-day-picker | Calendar component for date selection |
+| Toasts | Sonner | Success/error notification popups |
+| Testing | Vitest + React Testing Library | Unit and component testing |
+| Code Quality | ESLint + Prettier + Husky | Linting, formatting, pre-commit checks |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting Started
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Available Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start dev server (http://localhost:5173) |
+| `npm run build` | TypeScript check + production build |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | Run ESLint |
+| `npm run lint:fix` | Run ESLint with auto-fix |
+| `npm run format` | Format all files with Prettier |
+| `npm run format:check` | Check formatting without changes |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Project Structure
+
+```
+src/
+├── styles/               # Global styles
+│   ├── variables.scss    # Design tokens (colors, spacing, typography, breakpoints)
+│   ├── reset.scss        # CSS reset for cross-browser consistency
+│   └── global.scss       # Entry point — imported once in main.tsx
+├── App.tsx               # Root component
+├── App.module.scss       # Example SCSS Module usage
+└── main.tsx              # App entry point
+```
+
+## Styling Guide
+
+### SCSS Modules
+
+Every component gets its own `.module.scss` file. Classes are locally scoped — no naming collisions.
+
+```tsx
+// Component file
+import styles from './Button.module.scss';
+
+<button className={styles.primary}>Click</button>
+```
+
+```scss
+// Button.module.scss
+@use '@/styles/variables' as *;
+
+.primary {
+  background: $color-primary;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-md;
+}
+```
+
+### Design Tokens
+
+All reusable values live in `src/styles/variables.scss`. Import in any module:
+
+```scss
+@use '@/styles/variables' as *;
+```
+
+Available tokens: `$color-*`, `$font-size-*`, `$spacing-*`, `$radius-*`, `$shadow-*`, `$breakpoint-*`.
+
+## Path Aliases
+
+Use `@/` instead of relative paths:
+
+```tsx
+// Good
+import { Button } from '@/components/Button';
+
+// Bad
+import { Button } from '../../../components/Button';
 ```
