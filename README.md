@@ -154,15 +154,55 @@ The `ProtectedRoute` component checks if user is authenticated. If not — redir
 
 All pages share a common Layout (`src/components/Layout/`) with header and main content area. The `<Outlet />` renders the active page.
 
+## API Layer (Axios + TanStack Query)
 
-Use `@/` instead of relative paths:
+### Axios Instance
+
+Configured in `src/lib/api/apiClient.ts`. All API calls go through this instance.
+
+- Base URL set once
+- Request interceptor — attach auth token (TODO: implement)
+- Response interceptor — global error handling (TODO: implement)
 
 ```tsx
-// Good
-import { Button } from '@/components/Button';
+import { apiClient } from '@/lib/api';
 
-// Bad
-import { Button } from '../../../components/Button';
+// GET
+const response = await apiClient.get('/tours');
+
+// POST
+const response = await apiClient.post('/bookings', { tourId: '123' });
+```
+
+### TanStack Query
+
+Handles caching, loading states, and refetching automatically.
+
+**Creating a query hook:**
+
+```tsx
+import { useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/lib/api';
+
+export const useExampleQuery = () => {
+  return useQuery({
+    queryKey: ['example-users'],       // unique cache key
+    queryFn: async () => {             // fetch function
+      const response = await apiClient.get('/users');
+      return response.data;
+    },
+  });
+};
+```
+
+**Using in a component:**
+
+```tsx
+const { data, isLoading, error } = useExampleQuery();
+
+if (isLoading) return <p>Loading...</p>;
+if (error) return <p>Error!</p>;
+return <div>{data.name}</div>;
 ```
 
 ## Path Aliases
